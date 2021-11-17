@@ -1,2 +1,2 @@
-# BTFM_Note-
+# BTFM_Note
 Blue Team Field Manual Note
