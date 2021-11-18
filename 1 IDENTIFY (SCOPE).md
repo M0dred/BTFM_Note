@@ -80,7 +80,7 @@ C:\> %SystemRoot%\System32\Dns
 C:\> %SystemRoot%\System32\Winevt\Logs\MicrosoftWindows-DNSServer%4Analytical.etl
 ```
 
-[Ref](https://technet.microsoft.com/enus/library/cc940779.aspx)
+[LogLevel](https://technet.microsoft.com/enus/library/cc940779.aspx)
 
 
 **Enable DNS Logging:**
@@ -103,7 +103,8 @@ C:\> DNSCmd <DNS SERVER NAME> /config /logfilemaxsize 0xffffffff
 ## HASHING
 ---
 **File Checksum Integrity Verifier (FCIV):**
-[Ref](https://support.microsoft.com/en-us/topic/d92a713f-d793-7bd8-b0a4-4db811e29559)
+
+[File Checksum Integrity Verifier](https://support.microsoft.com/en-us/topic/d92a713f-d793-7bd8-b0a4-4db811e29559)
 
 **Hash a file:**
 ```
@@ -127,7 +128,9 @@ C:\> fciv.exe -v -shal -xml <FILE NAME>.xml
 
 **Note: May be possible to create a master db and compare to all systems from a cmd line. 
 Fast baseline and difference.**
-[Ref](https://technet.microsoft.com/enus/library/dn520872.aspx)
+
+[Get-FileHash](https://technet.microsoft.com/enus/library/dn520872.aspx)
+
 ```
 C:\> certutil -hashfile <FILE TO HASH> SHAl
 C:\> certutil -hashfile <FILE TO HASH> MD5
