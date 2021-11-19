@@ -210,24 +210,44 @@ C:\> strings <SUSPICIOUS FILE NAME>
 **IDENTIFY MALWARE**
 
 ## PROCESS EXPLORER
-```
-Todo: Need more details here.
-```
-
 
 + Step 1: Look at running processes by **running Process Explorer** (GUI) and identify potential indicators of compromise:
+	+ Items with no icon 
+	+ Items with no description or company name
+	+ Unsigned Microsoft images (First add Verified Signer column under *View tab->Select Columns*, then go to *Options tab* and choose *Verify Image Signatures*) 
+	+ Check all running process hashes in Virus Total (Go to Options tab and select Check [VirusTotal.com](https://www.virustotal.com/))
+	+ Suspicious files are in Windows directories or user profile
+	+ Purple items that are packed or compressed
+	+ Items with open TCP/IP endpoints
 
 + Step 2: Signature File Check:
+	+ (See Sigcheck)
 
 + Step 3: Strings Check:
+	+ Right click on suspicious process in *Process Explorer* and on pop up window choose *Strings tab* and review for suspicious URLs. Repeat for Image and Memory radio buttons
+	+ Look for **strange URLs** in strings 
 
 + Step 4: DLL View:
+	+ Pop open with Ct rl+D
+	+ Look for suspicious DLLs or services
+	+ Look for no description or no company name
+	+ Look at VirusTotal Results column
 
 + Step 5: Stop and Remove Malware:
+	+ Right click and select *Suspend* for any identified suspicious processes
+	+ Right click and select *Terminate Previous Suspended processes* 
 
 + Step 6: Clean up where malicious files Auto start on reboot.
+	+ Launch Autoruns
+	+ Under Options, Check the boxes *Verify Code Signatures* and *Hide Microsoft entries*
+	+ Look for suspicious process file from earlier steps on the everything tab and uncheck. Safer to uncheck than delete, in case of error.
+	+ *Press F5*, to refresh Autoruns, and confirm malicious file has not recreated the malicious entry into the previous unchecked auto start location. 
 
 + Step 7: Process Monitor
+	+ If malicious activity is still persistent, run *Process Monitor*.
+	+ Look for *newly started process* that start soon after terminated from previous steps. 
+
 [Process Monitor](https://technet.microsoft.com/en-us/sysinternals/processmonitor.aspx) 
+
 
 + Step 8: Repeat as needed to find all malicious files and process and/or combine with other tools and suites.
