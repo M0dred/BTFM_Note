@@ -239,7 +239,7 @@ C:\> strings <SUSPICIOUS FILE NAME>
 
 + Step 6: Clean up where malicious files Auto start on reboot.
 	+ Launch Autoruns
-	+ Under Options, Check the boxes *Verify Code Signatures* and *Hide Microsoft entries*
+	+ Under Options, Check the boxes **Verify Code Signatures** and **Hide Microsoft entries**
 	+ Look for suspicious process file from earlier steps on the everything tab and uncheck. Safer to uncheck than delete, in case of error.
 	+ *Press F5*, to refresh Autoruns, and confirm malicious file has not recreated the malicious entry into the previous unchecked auto start location. 
 

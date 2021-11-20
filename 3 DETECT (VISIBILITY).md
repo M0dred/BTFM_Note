@@ -89,3 +89,92 @@ done
 Todo
 ```
 ---
+
+**HONEY TECHNIQUES**
+
+## WINDOWS
+---
+**Honey Ports Windows:**
+
+[Getting A Better Pen Test](http://securityweekly.com/wp-content/uploads/2013/06/howtogetabetterpentest.pdf)
+
++ Step 1: Create new TCP Firewall Block rule on anything connecting on port 3333:
+```
+Todo
+
+echo  @echo off *** >> <BATCH FILE NAME>.bat 
+```
+
++ Step 2: Run Batch Script
+```
+<BATCH FILE NAME>.bat
+```
+
+**Windows Honey Ports PowerShell Script**
+
+[Windows Honey Ports PowerShell Script](https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.ps1)
+
++ Step 1: Download PowerShell Script
+```
+C:\> "%ProgramFiles%\Internet Explorer\iexplore.exe" https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.ps1
+```
+
++ Step 2: Run PowerShell Script 
+```
+C:\> honeyport.ps1
+```
+
+**Honey Hashes for Windows (Also for Detecting Mimikatz Use):**
+
+[SEC522: Application Security](https://www.sans.org/cyber-security-courses/application-security-securing-web-apps-api-microservices/)
+
++ Step 1: Create Fake Honey Hash. Note enter a fake password and keep command prompts open to keep password in memory 
+```
+C:\> runas /user:yourdomain.com\fakeadministratoraccount /netonly cmd.exe
+``` 
+
++ Step 2: Query for Remote Access Attempts 
+```
+C:\> wevtutil qe System /q:"*[System [(EventID=20274)]]" /f:text /rd:true /c:1 /r:remotecomputername
+```
+
++ Step 3: Query for Failed Login Attempts
+```
+C:\> wevtutil qe Security /q:"*[System[(EventID=4624 or EventID=4625)]]" /f:text /rd:true /c:5 /r:remotecomputername 
+```
+
++ Step 4: (Optional) Run queries in infinite loop with 30s pause
+```
+C:\> for /L %i in (1,0,2) do (Insert Step 2) & (Insert Step 3) & timeout 30
+```
+---
+
+## LINUX
+---
+**Honey Ports Linux:**
+
++ Run a while loop to create TCP Firewall rules to block any hosts connecting on port 2222 
+```
+while [1]; echo "started"; do IP = `nc -v -l -p 2222 2>&1 1> /dev/null | grep from | cut -d[-f 3 | cut -d] -f 1`; iptables -A INPUT -p tcp -s ${IP} -j DROP ; done 
+```
+
+**Linux Honey Ports Python Script:**
+
+[Linux Honey Ports Python Script](https://github.com/gchetrick/honeyports/blob/master/honeyports-0.5.py)
+
++ Step 1: Download Python Script
+```
+# wget https://github.com/gchetrick/honeyports/blob/master/honeyports-0.5.py 
+```
+
++ Step 2: Run Python Script
+```
+# python honeyports-0.5.py -p <CHOOSE AN OPEN PORT> -h <HOST IP ADDRESS>
+```
+
+**Detect rogue scanning with Labrea Tarpit:**
+```
+# apt-get install labrea
+# labrea -z -s -o -b -v -i eth0 2>&1 | tee -a log.txt 
+```
+---
