@@ -86,3 +86,119 @@ C:\> pspasswd.exe \\<IP ADDRESS or NAME OF REMOTECOMPUTER> -u <REMOTE USER NAME>
 PS C:\> pspasswd.exe \\<IP ADDRESS or NAME OF REMOTECOMPUTER> 
 ```
 ---
+
+## HOST FILE
+---
+**Flush DNS of malicious domain/IP:**
+```
+C:\> ipconfig /flushdns
+```
+
+**Flush NetBios cache of host/IP:**
+```
+C:\> nbtstat -R 
+```
+
+**Add new malicious domain to hosts file, and route to localhost:**
+```
+C:\> echo 127.0.0.1 <MALICIOUS DOMAIN> >> C:\Windows\System32\drivers\etc\hosts
+```
+
+**Check if hosts file is working, by sending ping to 127.0.0.1:**
+```
+C:\> ping <MALICIOUS DOMAIN> -n 1
+```
+---
+
+## WHITELIST
+---
+**Use a Proxy Auto Config(PAC) file to create Bad URL or IP List (IE, Firefox, Chrome):**
+```
+Todo
+```
+---
+
+## APPLICATION RESTRICTIONS
+---
+**Applocker - Server 2008 R2 or Windows 7 or higher: Using GUI Wizard configure:**
++ Executable Rules (. exe, . com)
++ DLL Rules ( .dll, .ocx)
++ Script Rules (.psl, .bat, .cmd, .vbs, .js)
++ Windows Install Rules ( .msi, .msp, .mst)
+
+**Steps to employ Applocker (GUI is needed for digital signed app restrictions):**
+```
+Todo
+```
+---
+
+# LINUX
+
+## DISABLE/STOP SERVICES
+---
+**Services information:**
+```
+# service --status-all
+# ps -ef
+# ps -aux
+```
+---
+
+
+## HOST SYSTEM FIREWALLS
+---
+**Export existing iptables firewall rules:**
+```
+# iptables-save > firewall.out
+```
+
+**Apply iptables:**
+```
+# iptables-restore < firewall.out
+```
+
+**Example iptables commands (IP, IP Range, Port Blocks):**
+```
+# iptables -A INPUT -s 10.10.10.10 -j DROP
+# iptables -A INPUT -s 10,10.10.0/24 -j DROP
+# iptables -A INPUT -p tcp --dport 10.10.10.10 -j DROP
+# iptables -A INPUT -p tcp --dport ssh -j DROP
+
+```
+
+**Block all connections:**
+```
+# iptables-policy INPUT DROP
+# iptables-policy OUTPUT DROP
+# iptables-policy FORWARD DROP
+
+```
+
+**Log all denied iptables rules:**
+```
+# iptables -I INPUT 5 -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+```
+
+**Save all current iptables rules:**
+**Ubuntu / RedHat / CentOS:**
+```
+# /etc/init.d/iptables save
+# /sbin/service iptables save
+# /sbin/iptables-save
+```
+
+**List all current iptables rules:**
+```
+# iptables -L
+```
+
+**Flush all current iptables rules:**
+```
+# iptables -F
+```
+
+**Start/Stop ufw service:**
+```
+Todo
+```
+---
